@@ -29,7 +29,7 @@ if __name__ == '__main__':
                     rotation_range=90, # 90°まで回転
                     width_shift_range=0.1, # 水平方向にランダムでシフト
                     height_shift_range=0.1, # 垂直方向にランダムでシフト
-                    channel_shift_range=50.0, # 色調をランｐｙてょダム変更
+                    channel_shift_range=50.0, # 色調をランダム変更
                     shear_range=0.39, # 斜め方向(pi/8まで)に引っ張る
                     horizontal_flip=True, # 垂直方向にランダムで反転
                     vertical_flip=True # 水平方向にランダムで反転
@@ -42,4 +42,4 @@ if __name__ == '__main__':
         x = img_to_array(img)
         x = np.expand_dims(x, axis=0)
         # 画像の拡張
-        draw_images(generator, x, ou
+        draw_images(generator, x, output_dir, i)
