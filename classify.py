@@ -15,7 +15,6 @@ def main():
     np_image = np.array(image)
     np_image = np_image / 255
     np_image = np_image[np.newaxis, :, :, :]
-    result = model.predict(np_image)
     #print(result)
     if result[0][0] > result[0][1]:
         print("gunpla")
