@@ -7,7 +7,7 @@ def main():
  files = glob.glob("./*.jpg")
  for file in files:
     # 画像を読み込む。
-  img = cv2.imread("sample.png")
+  img = cv2.imread(file)
 
   # グレースケールに変換する。
   gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
