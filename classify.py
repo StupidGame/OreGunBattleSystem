@@ -10,7 +10,6 @@ def main():
     #print(name)
     image = Image.open(name)
     image = image.resize((64,64))
-    image.show()
     model = load_model("data/model/model.h5")
     np_image = np.array(image)
     np_image = np_image / 255
