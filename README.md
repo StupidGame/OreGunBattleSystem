@@ -1,3 +1,3 @@
-# O.R.B.S <br> 
+# O.G.B.S <br> 
 Coming Soon <br>
-https://matsuo877.github.io/ORegunBattleSystem/
+https://matsuo877.github.io/OreGunBattleSystem/
