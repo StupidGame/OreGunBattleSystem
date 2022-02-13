@@ -1,12 +1,11 @@
 from email.mime import base
 import os, glob
-from PIL import Image
+import os.path
 import numpy as np
 import uuid
 import sys
 import cv2
 import matplotlib.pyplot as plt
-import test2
 
 def remove_bg(
     path,
@@ -55,41 +54,29 @@ def remove_bg(
 
     return img_a
 
-def main():
-    filepath_list = glob.glob(input_path + '/*.jpg') # .pngファイルをリストで取得する
-    for filepath in filepath_list:
-        img_fin = remove_bg(    
-            path = filepath,
-            BLUR = 21,
-            CANNY_THRESH_1 = 5,
-            CANNY_THRESH_2 = 70,
-            MASK_DILATE_ITER = 10,
-            MASK_ERODE_ITER = 6,
-        )
-        fig = plt.figure(frameon=False)
-        ax = plt.Axes(fig, [0., 0., 1., 1.])
-        ax.set_axis_off()
-        fig.add_axes(ax)
-        ax = plt.Axes(fig, [0., 0., 1., 1.])
-        ax.set_axis_off()
-        fig.add_axes(ax)
-        ax.imshow(img_fin)
-        fig.savefig(filepath)
-        for i in range(0, 36):
-            uuidgen = str(uuid.uuid4())
-            basename  = os.path.basename(filepath) # ファイルパスからファイル名を取得
-            save_filepath = out_path + '/' + basename [:-4] + '-' + uuidgen + '.png' # 保存ファイルパスを作成
-            img = Image.open(filepath)
-            img = img.convert('RGBA') # RGBA(png)→RGB(jpg)へ変換
-            img = img.rotate(i*10)
-            img.save(save_filepath, "PNG", quality=95)
-            print(filepath, '->', save_filepath)
-        if flag_delete_original_files:
-            os.remove(filepath)
-            print('delete', filepath)
+def main(filepath):
+    removepath = filepath
+    basename  = os.path.basename(filepath) # ファイルパスからファイル名を取得
+    img_fin = remove_bg(    
+        path = removepath,
+        BLUR = 21,
+        CANNY_THRESH_1 = 5,
+        CANNY_THRESH_2 = 70,
+        MASK_DILATE_ITER = 10,
+        MASK_ERODE_ITER = 6,
+    )
+    fig = plt.figure(frameon=False)
+    ax = plt.Axes(fig, [0., 0., 1., 1.])
+    ax.set_axis_off()
+    fig.add_axes(ax)
+    x = plt.Axes(fig, [0., 0., 1., 1.])
+    ax.set_axis_off()
+    fig.add_axes(ax)
+    ax.imshow(img_fin)
+    fig.savefig(filepath)
+
 
 if __name__ == '__main__':
     input_path = str(sys.argv[1]) # オリジナルpngファイルがあるフォルダを指定
     out_path = input_path # 変換先のフォルダを指定
-    flag_delete_original_files = True # 元ファイルを削除する場合は、True指定
-    main()
+    main(input_path)

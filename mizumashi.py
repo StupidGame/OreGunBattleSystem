@@ -6,7 +6,6 @@ import uuid
 import sys
 import cv2
 import matplotlib.pyplot as plt
-import test2
 
 def remove_bg(
     path,
@@ -91,5 +90,5 @@ def main():
 if __name__ == '__main__':
     input_path = str(sys.argv[1]) # オリジナルpngファイルがあるフォルダを指定
     out_path = input_path # 変換先のフォルダを指定
-    flag_delete_original_files = True # 元ファイルを削除する場合は、True指定
+    flag_delete_original_files = False # 元ファイルを削除する場合は、True指定
     main()
